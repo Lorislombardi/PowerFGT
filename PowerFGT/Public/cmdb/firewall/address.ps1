@@ -415,6 +415,15 @@ function Set-FGTFirewallAddress {
         if ( $PsBoundParameters.ContainsKey('vdom') ) {
             $invokeParams.add( 'vdom', $vdom )
         }
+        
+        # Check if address name containe / like 192.168.1.0/24
+        $regexMatchSlash = [regex]::Matches($address.name, '/')
+        
+        # Replace / by HTML encoding %2F
+        if($regexMatchSlash) {
+
+            $address.name = $address.name.replace('/','%2F')
+        }
 
         $uri = "api/v2/cmdb/firewall/address/$($address.name)"
 
