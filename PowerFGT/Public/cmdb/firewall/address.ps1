@@ -415,6 +415,7 @@ function Set-FGTFirewallAddress {
         if ( $PsBoundParameters.ContainsKey('vdom') ) {
             $invokeParams.add( 'vdom', $vdom )
         }
+        #
 
         $uri = "api/v2/cmdb/firewall/address/$($address.name)"
 
